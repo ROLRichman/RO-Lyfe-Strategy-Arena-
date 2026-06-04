@@ -1,1 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>RO'Lyfe Calculator Center™</title>
+
+<style>
+
+:root{
+--gold:#FFD700;
+--green:#00FF88;
+--dark:#050505;
+--panel:#111827;
+--text:#ffffff;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:var(--dark);
+color:var(--text);
+padding:15px;
+}
+
+header{
+text-align:center;
+padding:20px;
+margin-bottom:20px;
+}
+
+h1{
+color:var(--gold);
+}
+
+.card{
+background:var(--panel);
+padding:20px;
+margin-bottom:20px;
+border-radius:15px;
+}
+
+.card h2{
+color:var(--gold);
+margin-bottom:15px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:none;
+border-radius:8px;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+background:var(--green);
+border:none;
+font-weight:bold;
+cursor:pointer;
+border-radius:8px;
+}
+
+.result{
+margin-top:15px;
+font-size:1.1rem;
+color:var(--green);
+font-weight:bold;
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:30px;
+color:var(--gold);
+text-decoration:none;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+<h1>🧮 RO'Lyfe Calculator Center™</h1>
+<p>Funding • Real Estate • Investing</p>
+</header>
+
+<!-- FIX & FLIP -->
+
+<div class="card">
+
+<h2>Fix & Flip</h2>
+
+<input id="ffPurchase" placeholder="Purchase Price">
+
+<input id="ffRehab" placeholder="Rehab Cost">
+
+<input id="ffArv" placeholder="ARV">
+
+<button onclick="fixFlip()">
+Calculate
+</button>
+
+<div id="ffResult" class="result"></div>
+
+</div>
+
+<!-- BRRRR -->
+
+<div class="card">
+
+<h2>BRRRR</h2>
+
+<input id="bPurchase" placeholder="Purchase">
+
+<input id="bRehab" placeholder="Rehab">
+
+<input id="bRefi" placeholder="Refinance Amount">
+
+<button onclick="brrrr()">
+Calculate
+</button>
+
+<div id="bResult" class="result"></div>
+
+</div>
+
+<!-- WHOLESALE -->
+
+<div class="card">
+
+<h2>Wholesale</h2>
+
+<input id="wArv" placeholder="ARV">
+
+<input id="wRepair" placeholder="Repairs">
+
+<input id="wFee" placeholder="Assignment Fee">
+
+<button onclick="wholesale()">
+Calculate
+</button>
+
+<div id="wResult" class="result"></div>
+
+</div>
+
+<!-- DSCR -->
+
+<div class="card">
+
+<h2>DSCR</h2>
+
+<input id="dIncome" placeholder="Monthly Rent">
+
+<input id="dDebt" placeholder="Monthly Debt">
+
+<button onclick="dscr()">
+Calculate
+</button>
+
+<div id="dResult" class="result"></div>
+
+</div>
+
+<!-- HARD MONEY -->
+
+<div class="card">
+
+<h2>Hard Money</h2>
+
+<input id="hmLoan" placeholder="Loan Amount">
+
+<input id="hmRate" placeholder="Interest Rate %">
+
+<button onclick="hardMoney()">
+Calculate
+</button>
+
+<div id="hmResult" class="result"></div>
+
+</div>
+
+<!-- CASH FLOW -->
+
+<div class="card">
+
+<h2>Cash Flow</h2>
+
+<input id="cfIncome" placeholder="Monthly Income">
+
+<input id="cfExpenses" placeholder="Monthly Expenses">
+
+<button onclick="cashFlow()">
+Calculate
+</button>
+
+<div id="cfResult" class="result"></div>
+
+</div>
+
+<!-- LOAN PAYMENT -->
+
+<div class="card">
+
+<h2>Loan Payment</h2>
+
+<input id="lpLoan" placeholder="Loan Amount">
+
+<input id="lpRate" placeholder="Interest Rate %">
+
+<input id="lpYears" placeholder="Years">
+
+<button onclick="loanPayment()">
+Calculate
+</button>
+
+<div id="lpResult" class="result"></div>
+
+</div>
+
+<!-- ARV -->
+
+<div class="card">
+
+<h2>ARV Calculator</h2>
+
+<input id="arvValue" placeholder="Comparable Value">
+
+<input id="arvRepairs" placeholder="Repair Value Added">
+
+<button onclick="arvCalc()">
+Calculate
+</button>
+
+<div id="arvResult" class="result"></div>
+
+</div>
+
+<a class="back" href="../index.html">
+⬅ Back To Arena
+</a>
+
+<script>
+
+function money(v){
+return "$"+Number(v).toLocaleString();
+}
+
+function fixFlip(){
+
+let purchase=+ffPurchase.value;
+let rehab=+ffRehab.value;
+let arv=+ffArv.value;
+
+let profit=arv-(purchase+rehab);
+
+ffResult.innerHTML=
+"Estimated Profit: "+money(profit);
+
+}
+
+function brrrr(){
+
+let purchase=+bPurchase.value;
+let rehab=+bRehab.value;
+let refi=+bRefi.value;
+
+let invested=(purchase+rehab)-refi;
+
+bResult.innerHTML=
+"Cash Left In Deal: "+money(invested);
+
+}
+
+function wholesale(){
+
+let arv=+wArv.value;
+let repairs=+wRepair.value;
+let fee=+wFee.value;
+
+let mao=(arv*.70)-repairs-fee;
+
+wResult.innerHTML=
+"Maximum Allowable Offer: "+money(mao);
+
+}
+
+function dscr(){
+
+let income=+dIncome.value;
+let debt=+dDebt.value;
+
+let ratio=(income/debt).toFixed(2);
+
+dResult.innerHTML=
+"DSCR: "+ratio;
+
+}
+
+function hardMoney(){
+
+let loan=+hmLoan.value;
+let rate=+hmRate.value;
+
+let annual=loan*(rate/100);
+
+hmResult.innerHTML=
+"Annual Interest: "+money(annual);
+
+}
+
+function cashFlow(){
+
+let income=+cfIncome.value;
+let expenses=+cfExpenses.value;
+
+let cash=income-expenses;
+
+cfResult.innerHTML=
+"Monthly Cash Flow: "+money(cash);
+
+}
+
+function loanPayment(){
+
+let P=+lpLoan.value;
+let annual=+lpRate.value/100;
+let years=+lpYears.value;
+
+let r=annual/12;
+let n=years*12;
+
+let payment=
+(P*r)/(1-Math.pow(1+r,-n));
+
+lpResult.innerHTML=
+"Monthly Payment: "+money(payment.toFixed(2));
+
+}
+
+function arvCalc(){
+
+let value=+arvValue.value;
+let repairs=+arvRepairs.value;
+
+let arv=value+repairs;
+
+arvResult.innerHTML=
+"ARV: "+money(arv);
+
+}
+
+</script>
+
+</body>
+  </html>
