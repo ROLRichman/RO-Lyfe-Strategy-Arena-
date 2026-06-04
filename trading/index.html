@@ -1,1 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>RO'Lyfe LIVE Terminal™</title>
+
+<style>
+
+:root{
+--gold:#FFD700;
+--green:#00FF88;
+--red:#FF4444;
+--dark:#050505;
+--panel:#111827;
+--text:#ffffff;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:var(--dark);
+color:white;
+padding:15px;
+}
+
+header{
+text-align:center;
+padding:20px;
+margin-bottom:20px;
+}
+
+header h1{
+color:var(--gold);
+}
+
+.panel{
+background:var(--panel);
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+.panel h2{
+color:var(--gold);
+margin-bottom:15px;
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:12px;
+margin-bottom:10px;
+border:none;
+border-radius:8px;
+}
+
+button{
+width:100%;
+padding:12px;
+background:var(--green);
+border:none;
+font-weight:bold;
+border-radius:8px;
+cursor:pointer;
+margin-top:5px;
+}
+
+.result{
+margin-top:15px;
+padding:15px;
+background:#1e293b;
+border-radius:10px;
+}
+
+.metric{
+padding:10px;
+margin-top:10px;
+background:#0f172a;
+border-radius:8px;
+}
+
+.watchlist{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.symbol{
+background:#1e293b;
+padding:10px;
+border-radius:8px;
+text-align:center;
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:25px;
+color:var(--gold);
+text-decoration:none;
+}
+
+.green{
+color:var(--green);
+}
+
+.red{
+color:var(--red);
+}
+
+</style>
+</head>
+<body>
+
+<header>
+
+<h1>📈 RO'Lyfe LIVE Terminal™</h1>
+
+<p>
+Trade • Manage Risk • Build Wealth
+</p>
+
+</header>
+
+<div class="panel">
+
+<h2>Account Engine</h2>
+
+<input id="balance" type="number" placeholder="Account Balance">
+
+<input id="risk" type="number" placeholder="Risk % Per Trade">
+
+<input id="entry" type="number" step="0.01" placeholder="Entry Price">
+
+<input id="stop" type="number" step="0.01" placeholder="Stop Loss %">
+
+<button onclick="runTerminal()">
+
+RUN TERMINAL
+
+</button>
+
+<div id="accountOutput" class="result">
+
+Waiting...
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>RO'Lyfe Ladder™</h2>
+
+<div id="ladderOutput" class="result">
+
+Run Terminal First
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Trade Metrics</h2>
+
+<div id="metrics">
+
+Waiting...
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Execution Mode</h2>
+
+<select id="mode">
+
+<option>Manual Mode</option>
+
+<option>Auto Execution Mode</option>
+
+</select>
+
+<div id="modeStatus" class="result">
+
+Manual Mode Active
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Watchlist</h2>
+
+<div class="watchlist">
+
+<div class="symbol">SPY</div>
+<div class="symbol">QQQ</div>
+<div class="symbol">TSLA</div>
+<div class="symbol">NVDA</div>
+<div class="symbol">AAPL</div>
+<div class="symbol">META</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Trading Journal</h2>
+
+<textarea
+id="journal"
+rows="6"
+placeholder="Trade notes..."
+></textarea>
+
+<button onclick="saveJournal()">
+
+Save Notes
+
+</button>
+
+</div>
+
+<a href="../index.html" class="back">
+
+⬅ Back To Arena
+
+</a>
+
+<script>
+
+const journalBox =
+document.getElementById("journal");
+
+journalBox.value =
+localStorage.getItem("roJournal") || "";
+
+function saveJournal(){
+
+localStorage.setItem(
+"roJournal",
+journalBox.value
+);
+
+alert("Journal Saved");
+
+}
+
+document
+.getElementById("mode")
+.addEventListener("change",e=>{
+
+document.getElementById(
+"modeStatus"
+).innerHTML=e.target.value;
+
+});
+
+function runTerminal(){
+
+let balance=
+Number(
+document.getElementById("balance").value
+);
+
+let riskPercent=
+Number(
+document.getElementById("risk").value
+);
+
+let entry=
+Number(
+document.getElementById("entry").value
+);
+
+let stopPercent=
+Number(
+document.getElementById("stop").value
+);
+
+if(
+!balance ||
+!riskPercent ||
+!entry ||
+!stopPercent
+){
+alert("Fill all fields");
+return;
+}
+
+let riskAmount=
+balance*(riskPercent/100);
+
+let stopValue=
+entry*(stopPercent/100);
+
+let contracts=
+Math.floor(
+riskAmount/stopValue
+);
+
+let t1=entry*1.20;
+let t2=entry*1.40;
+let t3=entry*1.60;
+let runner=entry*1.80;
+
+let avgWin=
+(
+(t1-entry)+
+(t2-entry)+
+(t3-entry)+
+(runner-entry)
+)/4;
+
+avgWin*=contracts;
+
+let avgLoss=
+stopValue*contracts;
+
+let winProb=.50;
+
+let EV=
+(winProb*avgWin)-
+((1-winProb)*avgLoss);
+
+document
+.getElementById(
+"accountOutput"
+).innerHTML=
+
+`
+<b>Contracts:</b> ${contracts}<br>
+<b>Risk:</b> $${riskAmount.toFixed(2)}
+`;
+
+document
+.getElementById(
+"ladderOutput"
+).innerHTML=
+
+`
+<b>Entry:</b> $${entry.toFixed(2)}<br>
+<b>T1:</b> $${t1.toFixed(2)}<br>
+<b>T2:</b> $${t2.toFixed(2)}<br>
+<b>T3:</b> $${t3.toFixed(2)}<br>
+<b>BreakEven:</b> $${entry.toFixed(2)}<br>
+<b>Runner:</b> $${runner.toFixed(2)}
+`;
+
+document
+.getElementById(
+"metrics"
+).innerHTML=
+
+`
+<div class="metric">
+Win Probability: 50%
+</div>
+
+<div class="metric">
+Expected Value:
+$${EV.toFixed(2)}
+</div>
+
+<div class="metric">
+Risk:
+$${riskAmount.toFixed(2)}
+</div>
+
+<div class="metric">
+Max Profit:
+$${avgWin.toFixed(2)}
+</div>
+`;
+
+localStorage.setItem(
+"ro_trades",
+(
+parseInt(
+localStorage.getItem(
+"ro_trades"
+)||0
+)+1
+)
+);
+
+}
+
+</script>
+
+</body>
+</html>
