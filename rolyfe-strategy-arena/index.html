@@ -1,1 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>RO'Lyfe Strategy Arena™</title>
+
+<style>
+
+:root{
+    --gold:#FFD700;
+    --green:#00FF88;
+    --dark:#050505;
+    --panel:#111827;
+    --text:#ffffff;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:var(--dark);
+    color:var(--text);
+    font-family:Arial,Helvetica,sans-serif;
+    min-height:100vh;
+}
+
+header{
+    padding:30px 20px;
+    text-align:center;
+    background:linear-gradient(135deg,#111827,#050505);
+    border-bottom:2px solid var(--gold);
+}
+
+header h1{
+    color:var(--gold);
+    font-size:2rem;
+}
+
+header p{
+    color:var(--green);
+    margin-top:10px;
+}
+
+.hero{
+    padding:30px 20px;
+    text-align:center;
+}
+
+.hero h2{
+    font-size:1.8rem;
+    margin-bottom:15px;
+}
+
+.hero p{
+    opacity:.8;
+    line-height:1.6;
+    max-width:900px;
+    margin:auto;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:15px;
+    padding:20px;
+}
+
+.card{
+    background:var(--panel);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:16px;
+    padding:20px;
+    text-align:center;
+    transition:.3s;
+    cursor:pointer;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border-color:var(--green);
+}
+
+.card span{
+    font-size:2rem;
+    display:block;
+    margin-bottom:10px;
+}
+
+.card h3{
+    color:var(--gold);
+    margin-bottom:8px;
+}
+
+.stats{
+    margin:20px;
+    padding:20px;
+    border-radius:16px;
+    background:var(--panel);
+}
+
+.stats h2{
+    color:var(--gold);
+    margin-bottom:15px;
+}
+
+.stat-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.stat{
+    background:#1e293b;
+    padding:15px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.stat-value{
+    font-size:1.6rem;
+    color:var(--green);
+    font-weight:bold;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    opacity:.7;
+}
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#111827;
+    display:flex;
+    justify-content:space-around;
+    padding:12px;
+    border-top:1px solid rgba(255,255,255,.1);
+}
+
+.bottom-nav a{
+    color:white;
+    text-decoration:none;
+    font-size:.85rem;
+}
+
+@media(min-width:900px){
+    .bottom-nav{
+        display:none;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>RO'Lyfe Strategy Arena™</h1>
+    <p>Play • Build • Learn • Win</p>
+</header>
+
+<section class="hero">
+    <h2>Welcome Back Commander</h2>
+
+    <p>
+        RO'Lyfe Strategy Arena™ combines Chess, Property Empire,
+        Trading Systems, Funding Tools, AI Coaching,
+        and Real Estate Calculators into one ecosystem.
+    </p>
+</section>
+
+<section class="grid">
+
+    <div class="card" onclick="go('calculators/index.html')">
+        <span>🧮</span>
+        <h3>Calculators</h3>
+        <p>Analyze Deals</p>
+    </div>
+
+    <div class="card" onclick="go('trading/index.html')">
+        <span>📈</span>
+        <h3>Trading</h3>
+        <p>Market Dashboard</p>
+    </div>
+
+    <div class="card" onclick="go('chess/index.html')">
+        <span>♟️</span>
+        <h3>Chess</h3>
+        <p>Train Strategy</p>
+    </div>
+
+    <div class="card" onclick="go('empire/index.html')">
+        <span>🏢</span>
+        <h3>Empire</h3>
+        <p>Build Wealth</p>
+    </div>
+
+    <div class="card" onclick="go('ai/index.html')">
+        <span>🤖</span>
+        <h3>AI Coaches</h3>
+        <p>Choose Mentor</p>
+    </div>
+
+    <div class="card" onclick="go('education/index.html')">
+        <span>📚</span>
+        <h3>Education</h3>
+        <p>Learn Systems</p>
+    </div>
+
+    <div class="card" onclick="go('funding/index.html')">
+        <span>💰</span>
+        <h3>Funding</h3>
+        <p>Capital Resources</p>
+    </div>
+
+    <div class="card" onclick="go('settings/index.html')">
+        <span>⚙️</span>
+        <h3>Settings</h3>
+        <p>Customize Arena</p>
+    </div>
+
+</section>
+
+<section class="stats">
+
+    <h2>Quick Stats</h2>
+
+    <div class="stat-grid">
+
+        <div class="stat">
+            <div class="stat-value" id="trades">0</div>
+            <div>Trades</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-value" id="deals">0</div>
+            <div>Deals</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-value" id="games">0</div>
+            <div>Chess Games</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-value" id="assets">0</div>
+            <div>Empire Assets</div>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    RO'Lyfe Strategy Arena™ <br>
+    Built For Entrepreneurs, Traders & Investors
+</footer>
+
+<nav class="bottom-nav">
+    <a href="#">🏠 Home</a>
+    <a href="trading/index.html">📈 Trading</a>
+    <a href="calculators/index.html">🧮 Tools</a>
+    <a href="chess/index.html">♟️ Chess</a>
+    <a href="empire/index.html">🏢 Empire</a>
+</nav>
+
+<script>
+
+function go(url){
+    window.location.href=url;
+}
+
+document.getElementById("trades").textContent =
+localStorage.getItem("ro_trades") || 0;
+
+document.getElementById("deals").textContent =
+localStorage.getItem("ro_deals") || 0;
+
+document.getElementById("games").textContent =
+localStorage.getItem("ro_games") || 0;
+
+document.getElementById("assets").textContent =
+localStorage.getItem("ro_assets") || 0;
+
+</script>
+
+</body>
+</html>
