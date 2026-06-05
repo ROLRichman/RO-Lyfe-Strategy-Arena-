@@ -1,0 +1,66 @@
+{
+  "bots": [
+    {
+      "name": "RO'Lyfe AI",
+      "level": 1,
+      "style": "balanced",
+      "role": "general"
+    },
+
+    {
+      "name": "Ace Master",
+      "level": 2,
+      "style": "aggressive",
+      "role": "chess"
+    },
+
+    {
+      "name": "Funding King",
+      "level": 3,
+      "style": "capital",
+      "role": "funding"
+    },
+
+    {
+      "name": "Deal Hunter",
+      "level": 4,
+      "style": "opportunistic",
+      "role": "real-estate"
+    },
+
+    {
+      "name": "Future Trader",
+      "level": 5,
+      "style": "momentum",
+      "role": "trading"
+    },
+
+    {
+      "name": "EMG Guardian",
+      "level": 6,
+      "style": "defensive",
+      "role": "risk-management"
+    },
+
+    {
+      "name": "Empire Builder",
+      "level": 7,
+      "style": "strategic",
+      "role": "wealth-building"
+    },
+
+    {
+      "name": "Jamal",
+      "level": 10,
+      "style": "execution",
+      "role": "real-estate-closing"
+    },
+
+    {
+      "name": "Atlas",
+      "level": 10,
+      "style": "advisor",
+      "role": "business-growth"
+    }
+  ]
+}
