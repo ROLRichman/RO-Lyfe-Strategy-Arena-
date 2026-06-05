@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,7 +14,9 @@
     --green:#00FF88;
     --dark:#050505;
     --panel:#111827;
+    --panel2:#1E293B;
     --text:#ffffff;
+    --red:#ff4444;
 }
 
 *{
@@ -27,11 +30,12 @@ body{
     color:var(--text);
     font-family:Arial,Helvetica,sans-serif;
     min-height:100vh;
+    padding-bottom:90px;
 }
 
 header{
-    padding:30px 20px;
     text-align:center;
+    padding:30px 20px;
     background:linear-gradient(135deg,#111827,#050505);
     border-bottom:2px solid var(--gold);
 }
@@ -46,21 +50,27 @@ header p{
     margin-top:10px;
 }
 
+.clock{
+    margin-top:15px;
+    color:white;
+    font-size:.95rem;
+}
+
 .hero{
-    padding:30px 20px;
+    padding:25px;
     text-align:center;
 }
 
 .hero h2{
-    font-size:1.8rem;
+    color:var(--gold);
     margin-bottom:15px;
 }
 
 .hero p{
-    opacity:.8;
-    line-height:1.6;
+    opacity:.85;
     max-width:900px;
     margin:auto;
+    line-height:1.6;
 }
 
 .grid{
@@ -72,12 +82,12 @@ header p{
 
 .card{
     background:var(--panel);
-    border:1px solid rgba(255,255,255,.1);
     border-radius:16px;
     padding:20px;
     text-align:center;
-    transition:.3s;
     cursor:pointer;
+    transition:.3s;
+    border:1px solid rgba(255,255,255,.08);
 }
 
 .card:hover{
@@ -86,8 +96,8 @@ header p{
 }
 
 .card span{
-    font-size:2rem;
     display:block;
+    font-size:2rem;
     margin-bottom:10px;
 }
 
@@ -96,14 +106,19 @@ header p{
     margin-bottom:8px;
 }
 
-.stats{
-    margin:20px;
-    padding:20px;
-    border-radius:16px;
-    background:var(--panel);
+.card p{
+    font-size:.85rem;
+    opacity:.8;
 }
 
-.stats h2{
+.panel{
+    margin:20px;
+    background:var(--panel);
+    border-radius:16px;
+    padding:20px;
+}
+
+.panel h2{
     color:var(--gold);
     margin-bottom:15px;
 }
@@ -115,21 +130,63 @@ header p{
 }
 
 .stat{
-    background:#1e293b;
+    background:var(--panel2);
     padding:15px;
     border-radius:12px;
     text-align:center;
 }
 
 .stat-value{
-    font-size:1.6rem;
     color:var(--green);
+    font-size:1.7rem;
     font-weight:bold;
+}
+
+.reset-btn{
+    width:100%;
+    padding:15px;
+    margin-top:15px;
+    border:none;
+    border-radius:12px;
+    background:var(--red);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.reset-btn:hover{
+    opacity:.85;
+}
+
+.status-row{
+    display:flex;
+    justify-content:space-between;
+    margin:12px 0;
+}
+
+.live{
+    color:var(--green);
+}
+
+.mission{
+    line-height:1.8;
+}
+
+.launch-btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:var(--green);
+    color:black;
+    font-weight:bold;
+    margin-top:15px;
+    cursor:pointer;
 }
 
 footer{
     text-align:center;
-    padding:30px;
+    padding:25px;
     opacity:.7;
 }
 
@@ -148,32 +205,49 @@ footer{
 .bottom-nav a{
     color:white;
     text-decoration:none;
-    font-size:.85rem;
+    font-size:.8rem;
 }
 
 @media(min-width:900px){
+
     .bottom-nav{
         display:none;
     }
+
 }
 
 </style>
+
 </head>
+
 <body>
 
 <header>
+
     <h1>RO'Lyfe Strategy Arena™</h1>
+
     <p>Play • Build • Learn • Win</p>
+
+    <div class="clock" id="clock">
+        Loading Time...
+    </div>
+
 </header>
 
 <section class="hero">
+
     <h2>Welcome Back Commander</h2>
 
     <p>
-        RO'Lyfe Strategy Arena™ combines Chess, Property Empire,
-        Trading Systems, Funding Tools, AI Coaching,
-        and Real Estate Calculators into one ecosystem.
+
+        RO'Lyfe Strategy Arena™ combines Chess,
+        Property Empire, Trading Systems,
+        Funding Tools, AI Coaching, Education,
+        and Real Estate Calculators into one
+        powerful ecosystem.
+
     </p>
+
 </section>
 
 <section class="grid">
@@ -226,11 +300,20 @@ footer{
         <p>Customize Arena</p>
     </div>
 
+    <div class="card"
+    onclick="window.open('https://rolrichman.github.io/rolyfe-os/')">
+
+        <span>🖥️</span>
+        <h3>RO'Lyfe OS</h3>
+        <p>Launch Operating System</p>
+
+    </div>
+
 </section>
 
-<section class="stats">
+<section class="panel">
 
-    <h2>Quick Stats</h2>
+    <h2>📊 Arena Command Center</h2>
 
     <div class="stat-grid">
 
@@ -256,38 +339,144 @@ footer{
 
     </div>
 
+    <button class="reset-btn" onclick="resetStats()">
+        🔄 Reset Arena Stats
+    </button>
+
+</section>
+
+<section class="panel">
+
+    <h2>🚀 Arena Status</h2>
+
+    <div class="status-row">
+        <span>System</span>
+        <span class="live">ONLINE</span>
+    </div>
+
+    <div class="status-row">
+        <span>Theme</span>
+        <span>Original</span>
+    </div>
+
+    <div class="status-row">
+        <span>AI Coaches</span>
+        <span>7 Active</span>
+    </div>
+
+    <div class="status-row">
+        <span>Version</span>
+        <span>V2.0</span>
+    </div>
+
+</section>
+
+<section class="panel">
+
+    <h2>🎯 Daily Mission</h2>
+
+    <div class="mission">
+
+        ✅ Analyze 1 Trade<br>
+        ✅ Review 1 Deal<br>
+        ✅ Study 1 Lesson<br>
+        ✅ Build 1 Asset<br>
+        ✅ Execute With Discipline
+
+    </div>
+
+</section>
+
+<section class="panel">
+
+    <h2>⚡ Quick Launch</h2>
+
+    <button class="launch-btn"
+    onclick="window.open('https://rolrichman.github.io/rolyfe-os/')">
+
+        Launch RO'Lyfe OS
+
+    </button>
+
 </section>
 
 <footer>
-    RO'Lyfe Strategy Arena™ <br>
-    Built For Entrepreneurs, Traders & Investors
+
+    RO'Lyfe Strategy Arena™<br>
+
+    Built For Entrepreneurs,
+    Traders, Investors &
+    Strategic Thinkers
+
 </footer>
 
 <nav class="bottom-nav">
-    <a href="#">🏠 Home</a>
+
+    <a href="index.html">🏠 Home</a>
+
     <a href="trading/index.html">📈 Trading</a>
+
     <a href="calculators/index.html">🧮 Tools</a>
+
     <a href="chess/index.html">♟️ Chess</a>
+
     <a href="empire/index.html">🏢 Empire</a>
+
 </nav>
 
 <script>
 
 function go(url){
-    window.location.href=url;
+    window.location.href = url;
 }
 
-document.getElementById("trades").textContent =
-localStorage.getItem("ro_trades") || 0;
+function loadStats(){
 
-document.getElementById("deals").textContent =
-localStorage.getItem("ro_deals") || 0;
+    document.getElementById("trades").textContent =
+    localStorage.getItem("ro_trades") || 0;
 
-document.getElementById("games").textContent =
-localStorage.getItem("ro_games") || 0;
+    document.getElementById("deals").textContent =
+    localStorage.getItem("ro_deals") || 0;
 
-document.getElementById("assets").textContent =
-localStorage.getItem("ro_assets") || 0;
+    document.getElementById("games").textContent =
+    localStorage.getItem("ro_games") || 0;
+
+    document.getElementById("assets").textContent =
+    localStorage.getItem("ro_assets") || 0;
+
+}
+
+function resetStats(){
+
+    if(confirm("Reset all Arena stats?")){
+
+        localStorage.removeItem("ro_trades");
+        localStorage.removeItem("ro_deals");
+        localStorage.removeItem("ro_games");
+        localStorage.removeItem("ro_assets");
+
+        loadStats();
+
+        alert("Arena stats reset.");
+
+    }
+
+}
+
+function updateClock(){
+
+    const now = new Date();
+
+    document.getElementById("clock").innerHTML =
+    now.toLocaleString();
+
+}
+
+loadStats();
+
+updateClock();
+
+setInterval(updateClock,1000);
 
 </script>
 
