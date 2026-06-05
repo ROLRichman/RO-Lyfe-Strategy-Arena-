@@ -1,1 +1,82 @@
+{
+  "original": {
+    "name": "Original",
+    "primary": "#FFD700",
+    "secondary": "#00FF88",
+    "background": "#050505",
+    "card": "#111111",
+    "text": "#FFFFFF"
+  },
 
+  "emg": {
+    "name": "EMG",
+    "primary": "#FF4444",
+    "secondary": "#FFD700",
+    "background": "#0A0A0A",
+    "card": "#151515",
+    "text": "#FFFFFF"
+  },
+
+  "ace": {
+    "name": "ACE",
+    "primary": "#00FF88",
+    "secondary": "#FFFFFF",
+    "background": "#111827",
+    "card": "#1F2937",
+    "text": "#FFFFFF"
+  },
+
+  "future": {
+    "name": "Future",
+    "primary": "#00FFFF",
+    "secondary": "#8A2BE2",
+    "background": "#050505",
+    "card": "#101010",
+    "text": "#FFFFFF"
+  },
+
+  "funding": {
+    "name": "Funding",
+    "primary": "#22C55E",
+    "secondary": "#FFFFFF",
+    "background": "#052E16",
+    "card": "#14532D",
+    "text": "#FFFFFF"
+  },
+
+  "trading": {
+    "name": "Trading",
+    "primary": "#3B82F6",
+    "secondary": "#FFFFFF",
+    "background": "#0F172A",
+    "card": "#1E293B",
+    "text": "#FFFFFF"
+  },
+
+  "realestate": {
+    "name": "Real Estate",
+    "primary": "#F59E0B",
+    "secondary": "#FFFFFF",
+    "background": "#451A03",
+    "card": "#78350F",
+    "text": "#FFFFFF"
+  },
+
+  "ai": {
+    "name": "AI",
+    "primary": "#8B5CF6",
+    "secondary": "#FFFFFF",
+    "background": "#1E1B4B",
+    "card": "#312E81",
+    "text": "#FFFFFF"
+  },
+
+  "crypto": {
+    "name": "Crypto",
+    "primary": "#F97316",
+    "secondary": "#FFFFFF",
+    "background": "#431407",
+    "card": "#7C2D12",
+    "text": "#FFFFFF"
+  }
+}
