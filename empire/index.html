@@ -1,1 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>RO'Lyfe Empire™</title>
+
+<style>
+
+:root{
+--gold:#FFD700;
+--green:#00FF88;
+--dark:#050505;
+--panel:#111827;
+--text:#ffffff;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:var(--dark);
+color:var(--text);
+padding:15px;
+}
+
+header{
+text-align:center;
+padding:25px;
+margin-bottom:20px;
+}
+
+header h1{
+color:var(--gold);
+margin-bottom:10px;
+}
+
+header p{
+color:var(--green);
+}
+
+.panel{
+background:var(--panel);
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+.panel h2{
+color:var(--gold);
+margin-bottom:15px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+}
+
+.card{
+background:#1e293b;
+padding:20px;
+border-radius:12px;
+text-align:center;
+}
+
+.card h3{
+color:var(--green);
+margin-bottom:10px;
+}
+
+.value{
+font-size:2rem;
+font-weight:bold;
+color:var(--gold);
+}
+
+input{
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+margin-bottom:10px;
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+background:var(--green);
+font-weight:bold;
+cursor:pointer;
+}
+
+.result{
+margin-top:15px;
+padding:15px;
+background:#1e293b;
+border-radius:10px;
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:25px;
+color:var(--gold);
+text-decoration:none;
+}
+
+.level{
+font-size:1.2rem;
+font-weight:bold;
+color:var(--green);
+text-align:center;
+margin-top:10px;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+
+<h1>🏢 RO'Lyfe Empire™</h1>
+
+<p>
+Build • Scale • Dominate
+</p>
+
+</header>
+
+<div class="panel">
+
+<h2>👑 Empire Dashboard</h2>
+
+<div class="grid">
+
+<div class="card">
+<div class="value" id="cashValue">$0</div>
+<h3>Empire Cash</h3>
+</div>
+
+<div class="card">
+<div class="value" id="assetValue">0</div>
+<h3>Assets</h3>
+</div>
+
+<div class="card">
+<div class="value" id="incomeValue">$0</div>
+<h3>Monthly Income</h3>
+</div>
+
+<div class="card">
+<div class="value" id="levelValue">1</div>
+<h3>Empire Level</h3>
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>➕ Add Asset</h2>
+
+<input id="assetName" placeholder="Asset Name">
+
+<input id="assetIncome" type="number" placeholder="Monthly Income">
+
+<button onclick="addAsset()">
+Add Asset
+</button>
+
+<div id="assetOutput" class="result">
+No Assets Added Yet
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>🎯 Empire Missions</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Level 1</h3>
+<p>Acquire First Asset</p>
+</div>
+
+<div class="card">
+<h3>Level 2</h3>
+<p>$1,000 Monthly Income</p>
+</div>
+
+<div class="card">
+<h3>Level 3</h3>
+<p>5 Assets Owned</p>
+</div>
+
+<div class="card">
+<h3>Level 4</h3>
+<p>$10,000 Monthly Income</p>
+</div>
+
+<div class="card">
+<h3>Level 5</h3>
+<p>Financial Freedom</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>🚀 Empire Status</h2>
+
+<div class="level" id="empireStatus">
+Empire Builder
+</div>
+
+</div>
+
+<a href="../index.html" class="back">
+
+⬅ Back To Arena
+
+</a>
+
+<script>
+
+let cash =
+Number(localStorage.getItem("ro_empire_cash")) || 0;
+
+let assets =
+Number(localStorage.getItem("ro_assets")) || 0;
+
+let income =
+Number(localStorage.getItem("ro_income")) || 0;
+
+updateDashboard();
+
+function addAsset(){
+
+let name =
+document.getElementById("assetName").value;
+
+let monthly =
+Number(
+document.getElementById("assetIncome").value
+);
+
+if(!name || !monthly){
+alert("Enter Asset Name & Income");
+return;
+}
+
+assets++;
+income += monthly;
+
+cash += monthly * 12;
+
+localStorage.setItem(
+"ro_assets",
+assets
+);
+
+localStorage.setItem(
+"ro_income",
+income
+);
+
+localStorage.setItem(
+"ro_empire_cash",
+cash
+);
+
+document.getElementById(
+"assetOutput"
+).innerHTML +=
+
+"<br>✅ " +
+name +
+" | $" +
+monthly.toLocaleString() +
+"/month";
+
+updateDashboard();
+
+}
+
+function updateDashboard(){
+
+document.getElementById(
+"cashValue"
+).innerHTML =
+"$" + cash.toLocaleString();
+
+document.getElementById(
+"assetValue"
+).innerHTML =
+assets;
+
+document.getElementById(
+"incomeValue"
+).innerHTML =
+"$" + income.toLocaleString();
+
+let level = 1;
+
+if(income >= 1000) level = 2;
+if(assets >= 5) level = 3;
+if(income >= 10000) level = 4;
+if(income >= 25000) level = 5;
+
+document.getElementById(
+"levelValue"
+).innerHTML =
+level;
+
+let status =
+"Empire Builder";
+
+if(level===2)
+status="Cash Flow Operator";
+
+if(level===3)
+status="Portfolio Owner";
+
+if(level===4)
+status="Empire Strategist";
+
+if(level===5)
+status="Financial Commander";
+
+document.getElementById(
+"empireStatus"
+).innerHTML =
+status;
+
+}
+
+</script>
+
+</body>
+  </html>
