@@ -1,1 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>RO'Lyfe University™</title>
+
+<style>
+
+:root{
+--gold:#FFD700;
+--green:#00FF88;
+--dark:#050505;
+--panel:#111827;
+--text:#ffffff;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:var(--dark);
+color:var(--text);
+padding:15px;
+}
+
+header{
+text-align:center;
+padding:25px;
+margin-bottom:20px;
+}
+
+header h1{
+color:var(--gold);
+margin-bottom:10px;
+}
+
+header p{
+color:var(--green);
+}
+
+.panel{
+background:var(--panel);
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+.panel h2{
+color:var(--gold);
+margin-bottom:15px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+}
+
+.card{
+background:#1e293b;
+padding:20px;
+border-radius:12px;
+}
+
+.card h3{
+color:var(--green);
+margin-bottom:10px;
+}
+
+.card p{
+opacity:.85;
+line-height:1.5;
+}
+
+.button{
+display:block;
+width:100%;
+padding:14px;
+margin-top:10px;
+background:var(--green);
+color:black;
+font-weight:bold;
+text-align:center;
+text-decoration:none;
+border-radius:10px;
+}
+
+.progress-box{
+background:#1e293b;
+padding:15px;
+border-radius:10px;
+margin-top:10px;
+}
+
+.progress-value{
+font-size:2rem;
+font-weight:bold;
+color:var(--green);
+text-align:center;
+}
+
+input{
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+margin-top:10px;
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:25px;
+text-decoration:none;
+color:var(--gold);
+}
+
+</style>
+</head>
+<body>
+
+<header>
+
+<h1>📚 RO'Lyfe University™</h1>
+
+<p>
+Learn • Execute • Master
+</p>
+
+</header>
+
+<div class="panel">
+
+<h2>🎓 Learning Paths</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>🏠 Real Estate</h3>
+<p>
+Wholesaling, Fix & Flip, Rentals,
+ARV, Rehab Budgeting, Deal Analysis.
+</p>
+</div>
+
+<div class="card">
+<h3>💰 Funding</h3>
+<p>
+DSCR, Bridge Loans,
+Private Lending, Hard Money,
+Commercial Funding.
+</p>
+</div>
+
+<div class="card">
+<h3>📈 Trading</h3>
+<p>
+Risk Management,
+Options,
+SPX,
+Ladder Strategy,
+Trade Journaling.
+</p>
+</div>
+
+<div class="card">
+<h3>🏢 Business</h3>
+<p>
+Systems,
+Operations,
+Sales Funnels,
+Automation,
+Scaling Companies.
+</p>
+</div>
+
+<div class="card">
+<h3>♟️ Strategic Thinking</h3>
+<p>
+Chess Concepts,
+Decision Trees,
+Positioning,
+Long-Term Planning.
+</p>
+</div>
+
+<div class="card">
+<h3>🤖 AI Operations</h3>
+<p>
+Prompt Systems,
+Automation,
+AI Agents,
+Workflow Design.
+</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>🏆 Certification Ladder</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Level 1</h3>
+<p>Student</p>
+</div>
+
+<div class="card">
+<h3>Level 2</h3>
+<p>Operator</p>
+</div>
+
+<div class="card">
+<h3>Level 3</h3>
+<p>Analyst</p>
+</div>
+
+<div class="card">
+<h3>Level 4</h3>
+<p>Strategist</p>
+</div>
+
+<div class="card">
+<h3>Level 5</h3>
+<p>Empire Builder</p>
+</div>
+
+<div class="card">
+<h3>Level 6</h3>
+<p>Commander</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>📊 Progress Tracker</h2>
+
+<input
+id="progressInput"
+type="number"
+placeholder="Enter Completion %"
+>
+
+<a href="#" class="button" onclick="saveProgress()">
+Save Progress
+</a>
+
+<div class="progress-box">
+
+<div class="progress-value" id="progressDisplay">
+0%
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>🎥 Video Vault</h2>
+
+<p>
+Future training videos,
+market breakdowns,
+funding lessons,
+trade reviews,
+and business systems.
+</p>
+
+</div>
+
+<div class="panel">
+
+<h2>📄 PDF Vault</h2>
+
+<p>
+Contracts,
+Deal Checklists,
+Funding Guides,
+Trading Plans,
+Business SOPs.
+</p>
+
+</div>
+
+<div class="panel">
+
+<h2>🚀 Mission Objective</h2>
+
+<p>
+
+The goal of RO'Lyfe University™
+is not information.
+
+The goal is execution.
+
+Learn a skill.
+
+Apply it.
+
+Track results.
+
+Build assets.
+
+Create freedom.
+
+</p>
+
+</div>
+
+<a href="../index.html" class="back">
+
+⬅ Back To Arena
+
+</a>
+
+<script>
+
+let savedProgress =
+localStorage.getItem("ro_education_progress") || "0";
+
+document.getElementById("progressDisplay").innerHTML =
+savedProgress + "%";
+
+function saveProgress(){
+
+let value =
+document.getElementById("progressInput").value;
+
+if(!value){
+alert("Enter progress percentage");
+return;
+}
+
+localStorage.setItem(
+"ro_education_progress",
+value
+);
+
+document.getElementById("progressDisplay").innerHTML =
+value + "%";
+
+}
+
+</script>
+
+</body>
+  </html>
