@@ -1,324 +1,364 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>RO'Lyfe LIVE Terminal™</title>
-
-<style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RO'Lyfe LIVE Terminal™ PRO</title><style>
 
 :root{
---gold:#FFD700;
---green:#00FF88;
---red:#FF4444;
---dark:#050505;
---panel:#111827;
---text:#ffffff;
+    --gold:#FFD700;
+    --green:#00FF88;
+    --red:#FF4444;
+    --blue:#00BFFF;
+    --dark:#050505;
+    --panel:#111827;
+    --panel2:#1E293B;
+    --text:#FFFFFF;
 }
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-background:var(--dark);
-color:white;
-padding:15px;
+    background:var(--dark);
+    color:var(--text);
+    padding:15px;
+    padding-bottom:100px;
 }
 
 header{
-text-align:center;
-padding:20px;
-margin-bottom:20px;
+    text-align:center;
+    padding:25px;
+    margin-bottom:20px;
 }
 
 header h1{
-color:var(--gold);
+    color:var(--gold);
+    margin-bottom:10px;
+}
+
+header p{
+    color:var(--green);
 }
 
 .panel{
-background:var(--panel);
-padding:20px;
-border-radius:15px;
-margin-bottom:20px;
+    background:var(--panel);
+    padding:20px;
+    border-radius:16px;
+    margin-bottom:20px;
 }
 
 .panel h2{
-color:var(--gold);
-margin-bottom:15px;
+    color:var(--gold);
+    margin-bottom:15px;
 }
 
 input,
-select,
-textarea{
-width:100%;
-padding:12px;
-margin-bottom:10px;
-border:none;
-border-radius:8px;
+textarea,
+select{
+    width:100%;
+    padding:12px;
+    margin-bottom:10px;
+    border:none;
+    border-radius:10px;
 }
 
 button{
-width:100%;
-padding:12px;
-background:var(--green);
-border:none;
-font-weight:bold;
-border-radius:8px;
-cursor:pointer;
-margin-top:5px;
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:5px;
+}
+
+.run-btn{
+    background:var(--green);
+    color:black;
+}
+
+.reset-btn{
+    background:var(--red);
+    color:white;
 }
 
 .result{
-margin-top:15px;
-padding:15px;
-background:#1e293b;
-border-radius:10px;
+    background:var(--panel2);
+    padding:15px;
+    border-radius:10px;
+    margin-top:10px;
+    line-height:1.8;
 }
 
 .metric{
-padding:10px;
-margin-top:10px;
-background:#0f172a;
-border-radius:8px;
+    background:#0f172a;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:10px;
 }
 
 .watchlist{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
 }
 
 .symbol{
-background:#1e293b;
-padding:10px;
-border-radius:8px;
-text-align:center;
+    background:#0f172a;
+    padding:12px;
+    border-radius:10px;
+    text-align:center;
+}
+
+.launch-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.launch-btn{
+    background:#0f172a;
+    color:white;
+    text-decoration:none;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+    display:block;
+}
+
+.signal{
+    text-align:center;
+    padding:15px;
+    border-radius:12px;
+    font-size:1.2rem;
+    font-weight:bold;
+}
+
+.buy{
+    background:#0f3d25;
+    color:#00ff88;
+}
+
+.sell{
+    background:#4b1111;
+    color:#ff5555;
+}
+
+.wait{
+    background:#2d2d2d;
+    color:#ffffff;
 }
 
 .back{
-display:block;
-text-align:center;
-margin-top:25px;
-color:var(--gold);
-text-decoration:none;
+    display:block;
+    text-align:center;
+    color:var(--gold);
+    text-decoration:none;
+    margin-top:20px;
 }
 
-.green{
-color:var(--green);
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#111827;
+    display:flex;
+    justify-content:space-around;
+    padding:12px;
+    border-top:1px solid rgba(255,255,255,.1);
 }
 
-.red{
-color:var(--red);
+.bottom-nav a{
+    color:white;
+    text-decoration:none;
+    font-size:.8rem;
 }
 
-</style>
-</head>
-<body>
+@media(min-width:900px){
 
-<header>
+.bottom-nav{
+display:none;
+}
 
-<h1>📈 RO'Lyfe LIVE Terminal™</h1>
+}
 
-<p>
-Trade • Manage Risk • Build Wealth
-</p>
+</style></head>
+<body><header><h1>📈 RO'Lyfe LIVE Terminal™ PRO</h1><p>
+One Brain • One Ladder • One System
+</p></header><div class="panel"><h2>💼 Account Engine</h2><input type="number" id="balance" placeholder="Account Balance"><input type="number" id="risk" placeholder="Risk % Per Trade"><input type="number" id="entry" step="0.01" placeholder="Entry Price"><input type="number" id="stop" placeholder="Stop Loss %"><input type="number" id="winrate" value="50" placeholder="Win Rate %"><button class="run-btn" onclick="runTerminal()">🚀 RUN TERMINAL
 
-</header>
+</button><div id="accountOutput" class="result">Waiting For Input...
 
-<div class="panel">
+</div></div><div class="panel"><h2>🪜 RO'Lyfe Ladder Builder</h2><div id="ladderOutput" class="result">Run Terminal First
 
-<h2>Account Engine</h2>
+</div></div><div class="panel"><h2>📊 Trade Metrics</h2><div id="metrics">Waiting...
 
-<input id="balance" type="number" placeholder="Account Balance">
+</div></div><div class="panel"><h2>🎯 Execution Signal</h2><div id="signalBox" class="signal wait">WAIT
 
-<input id="risk" type="number" placeholder="Risk % Per Trade">
+</div></div><div class="panel"><h2>🧠 Trading Playbook</h2><div class="metric">
+⏰ PREMARKET<br>
+6:00am - 9:00am
+</div><div class="metric">
+🚀 OPEN<br>
+9:35am - 10:15am
+</div><div class="metric">
+📊 MIDDAY<br>
+11:30am - 2:00pm
+</div><div class="metric">
+⚡ POWER HOUR<br>
+3:00pm - 4:00pm
+</div></div><div class="panel"><h2>🚀 Quick Launch</h2><div class="launch-grid"><a class="launch-btn"
+href="https://rolrichman.github.io/rolyfe-os/"
+target="_blank">
 
-<input id="entry" type="number" step="0.01" placeholder="Entry Price">
+🖥️ RO'Lyfe OS
 
-<input id="stop" type="number" step="0.01" placeholder="Stop Loss %">
+</a><a class="launch-btn"
+href="https://bullishchart.com/daysgt200sma/"
+target="_blank">
 
-<button onclick="runTerminal()">
+📈 BullishChart
 
-RUN TERMINAL
+</a><a class="launch-btn"
+href="https://tradingtwohundred.com/"
+target="_blank">
 
-</button>
+📊 Trading200
 
-<div id="accountOutput" class="result">
+</a><a class="launch-btn"
+href="https://tradingtwohundred.com/movers/"
+target="_blank">
 
-Waiting...
+🔥 Movers
 
-</div>
-
-</div>
-
-<div class="panel">
-
-<h2>RO'Lyfe Ladder™</h2>
-
-<div id="ladderOutput" class="result">
-
-Run Terminal First
-
-</div>
-
-</div>
-
-<div class="panel">
-
-<h2>Trade Metrics</h2>
-
-<div id="metrics">
-
-Waiting...
-
-</div>
-
-</div>
-
-<div class="panel">
-
-<h2>Execution Mode</h2>
-
-<select id="mode">
-
-<option>Manual Mode</option>
-
-<option>Auto Execution Mode</option>
-
-</select>
-
-<div id="modeStatus" class="result">
-
-Manual Mode Active
-
-</div>
-
-</div>
-
-<div class="panel">
-
-<h2>Watchlist</h2>
-
-<div class="watchlist">
-
-<div class="symbol">SPY</div>
+</a></div></div><div class="panel"><h2>📋 Watchlist</h2><div class="watchlist"><div class="symbol">SPY</div>
 <div class="symbol">QQQ</div>
-<div class="symbol">TSLA</div>
-<div class="symbol">NVDA</div>
 <div class="symbol">AAPL</div>
+<div class="symbol">MSFT</div>
+<div class="symbol">NVDA</div>
 <div class="symbol">META</div>
+<div class="symbol">TSLA</div>
+<div class="symbol">AMD</div>
+<div class="symbol">PLTR</div>
+<div class="symbol">IWM</div></div></div><div class="panel"><h2>🤖 Future Trader AI</h2><div class="result">Status: ONLINE<br>
+Focus: Momentum Trading<br>
+Risk Model: RO'Lyfe Ladder™<br>
+Mode: Trend Following<br>
 
-</div>
-
-</div>
-
-<div class="panel">
-
-<h2>Trading Journal</h2>
-
-<textarea
+</div></div><div class="panel"><h2>📝 Trading Journal</h2><textarea
 id="journal"
-rows="6"
-placeholder="Trade notes..."
-></textarea>
+rows="8"
+placeholder="Trade Notes..."
+></textarea><button class="run-btn"
+onclick="saveJournal()">
 
-<button onclick="saveJournal()">
+Save Journal
 
-Save Notes
+</button></div><div class="panel"><h2>⚙️ Data Controls</h2><button
+class="reset-btn"
+onclick="resetTrading()">
 
-</button>
+Reset Trading Data
 
-</div>
+</button></div><a href="../index.html" class="back">⬅ Back To Arena
 
-<a href="../index.html" class="back">
+</a><nav class="bottom-nav"><a href="../index.html">🏠 Home</a>
 
-⬅ Back To Arena
+<a href="#">📈 Trading</a>
 
-</a>
+<a href="../calculators/index.html">🧮 Tools</a>
 
-<script>
+<a href="../ai/index.html">🤖 AI</a>
 
-const journalBox =
+<a href="../funding/index.html">💰 Funding</a>
+
+</nav><script>
+
+const journal =
 document.getElementById("journal");
 
-journalBox.value =
+journal.value =
 localStorage.getItem("roJournal") || "";
 
 function saveJournal(){
 
 localStorage.setItem(
 "roJournal",
-journalBox.value
+journal.value
 );
 
 alert("Journal Saved");
 
 }
 
-document
-.getElementById("mode")
-.addEventListener("change",e=>{
+function resetTrading(){
 
-document.getElementById(
-"modeStatus"
-).innerHTML=e.target.value;
+if(confirm("Reset Trading Data?")){
 
-});
+localStorage.removeItem("roJournal");
+localStorage.removeItem("ro_trades");
+
+journal.value="";
+
+alert("Trading Data Reset");
+
+}
+
+}
 
 function runTerminal(){
 
-let balance=
-Number(
-document.getElementById("balance").value
-);
+let balance =
+Number(document.getElementById("balance").value);
 
-let riskPercent=
-Number(
-document.getElementById("risk").value
-);
+let risk =
+Number(document.getElementById("risk").value);
 
-let entry=
-Number(
-document.getElementById("entry").value
-);
+let entry =
+Number(document.getElementById("entry").value);
 
-let stopPercent=
-Number(
-document.getElementById("stop").value
-);
+let stop =
+Number(document.getElementById("stop").value);
+
+let win =
+Number(document.getElementById("winrate").value);
 
 if(
 !balance ||
-!riskPercent ||
+!risk ||
 !entry ||
-!stopPercent
+!stop
 ){
-alert("Fill all fields");
+alert("Complete All Fields");
 return;
 }
 
-let riskAmount=
-balance*(riskPercent/100);
+let riskAmount =
+balance*(risk/100);
 
-let stopValue=
-entry*(stopPercent/100);
+let stopValue =
+entry*(stop/100);
 
-let contracts=
+let contracts =
 Math.floor(
 riskAmount/stopValue
 );
 
-let t1=entry*1.20;
-let t2=entry*1.40;
-let t3=entry*1.60;
-let runner=entry*1.80;
+let stop10 = entry*.90;
+let stop20 = entry*.80;
+let stop30 = entry*.70;
+let stop40 = entry*.60;
 
-let avgWin=
+let t1 = entry*1.20;
+let t2 = entry*1.40;
+let t3 = entry*1.60;
+let runner = entry*1.80;
+
+let avgWin =
 (
 (t1-entry)+
 (t2-entry)+
@@ -328,47 +368,53 @@ let avgWin=
 
 avgWin*=contracts;
 
-let avgLoss=
+let avgLoss =
 stopValue*contracts;
 
-let winProb=.50;
+let winProb =
+win/100;
 
-let EV=
-(winProb*avgWin)-
+let EV =
+(winProb*avgWin) -
 ((1-winProb)*avgLoss);
 
-document
-.getElementById(
+let rr =
+(avgWin/avgLoss).toFixed(2);
+
+document.getElementById(
 "accountOutput"
 ).innerHTML=
 
 `
-<b>Contracts:</b> ${contracts}<br>
-<b>Risk:</b> $${riskAmount.toFixed(2)}
+Contracts: ${contracts}<br>
+Risk Amount: $${riskAmount.toFixed(2)}
 `;
 
-document
-.getElementById(
+document.getElementById(
 "ladderOutput"
 ).innerHTML=
 
 `
-<b>Entry:</b> $${entry.toFixed(2)}<br>
-<b>T1:</b> $${t1.toFixed(2)}<br>
-<b>T2:</b> $${t2.toFixed(2)}<br>
-<b>T3:</b> $${t3.toFixed(2)}<br>
-<b>BreakEven:</b> $${entry.toFixed(2)}<br>
-<b>Runner:</b> $${runner.toFixed(2)}
+<b>Entry:</b> $${entry.toFixed(2)}<br><br>
+
+10% Stop: $${stop10.toFixed(2)}<br>
+20% Stop: $${stop20.toFixed(2)}<br>
+30% Stop: $${stop30.toFixed(2)}<br>
+40% Stop: $${stop40.toFixed(2)}<br><br>
+
+T1: $${t1.toFixed(2)}<br>
+T2: $${t2.toFixed(2)}<br>
+T3: $${t3.toFixed(2)}<br>
+Runner: $${runner.toFixed(2)}
 `;
 
-document
-.getElementById(
+document.getElementById(
 "metrics"
 ).innerHTML=
 
 `
 <div class="metric">
-Win Probability: 50%
+Contracts: ${contracts}
 </div>
 
 <div class="metric">
@@ -377,15 +423,41 @@ $${EV.toFixed(2)}
 </div>
 
 <div class="metric">
-Risk:
-$${riskAmount.toFixed(2)}
+Reward / Risk:
+${rr}:1
 </div>
 
 <div class="metric">
 Max Profit:
 $${avgWin.toFixed(2)}
 </div>
+
+<div class="metric">
+Break Even:
+${(100/(1+parseFloat(rr))).toFixed(2)}%
+</div>
 `;
+
+let signal =
+document.getElementById("signalBox");
+
+if(EV > 0){
+
+signal.className =
+"signal buy";
+
+signal.innerHTML =
+"BUY";
+
+}else{
+
+signal.className =
+"signal sell";
+
+signal.innerHTML =
+"NO TRADE";
+
+}
 
 localStorage.setItem(
 "ro_trades",
@@ -400,7 +472,5 @@ localStorage.getItem(
 
 }
 
-</script>
-
-</body>
+</script></body>
 </html>
