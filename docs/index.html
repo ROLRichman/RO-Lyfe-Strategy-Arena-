@@ -1,1 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>RO'Lyfe Document Center™</title>
+
+<style>
+
+:root{
+--gold:#FFD700;
+--green:#00FF88;
+--red:#FF4444;
+--dark:#050505;
+--panel:#111827;
+--text:#ffffff;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:var(--dark);
+color:white;
+padding:15px;
+}
+
+header{
+text-align:center;
+padding:25px;
+margin-bottom:20px;
+}
+
+header h1{
+color:var(--gold);
+margin-bottom:10px;
+}
+
+header p{
+color:var(--green);
+}
+
+.panel{
+background:var(--panel);
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+.panel h2{
+color:var(--gold);
+margin-bottom:15px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+}
+
+.card{
+background:#1e293b;
+padding:20px;
+border-radius:12px;
+cursor:pointer;
+transition:.3s;
+text-align:center;
+}
+
+.card:hover{
+transform:translateY(-5px);
+border:1px solid var(--green);
+}
+
+.card span{
+font-size:2rem;
+display:block;
+margin-bottom:10px;
+}
+
+.card h3{
+color:var(--gold);
+margin-bottom:8px;
+}
+
+.btn{
+display:block;
+width:100%;
+padding:14px;
+background:var(--green);
+color:black;
+font-weight:bold;
+text-align:center;
+text-decoration:none;
+border-radius:10px;
+margin-top:10px;
+}
+
+.quick-links{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:10px;
+}
+
+.link-box{
+background:#0f172a;
+padding:15px;
+border-radius:10px;
+text-align:center;
+}
+
+.link-box a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+textarea{
+width:100%;
+padding:15px;
+border:none;
+border-radius:10px;
+background:#0f172a;
+color:white;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+}
+
+.stat{
+background:#0f172a;
+padding:15px;
+border-radius:10px;
+text-align:center;
+}
+
+.value{
+font-size:1.6rem;
+font-weight:bold;
+color:var(--green);
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:25px;
+color:var(--gold);
+text-decoration:none;
+font-size:1.1rem;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+
+<h1>📄 RO'Lyfe Document Center™</h1>
+
+<p>
+Contracts • Funding Docs • Borrower Files • Execution Hub
+</p>
+
+</header>
+
+<div class="panel">
+
+<h2>Execution Hub</h2>
+
+<div class="grid">
+
+<div class="card">
+<span>📑</span>
+<h3>Loan Package</h3>
+<p>Organize lender submissions</p>
+</div>
+
+<div class="card">
+<span>🏠</span>
+<h3>Purchase Contracts</h3>
+<p>Store deal agreements</p>
+</div>
+
+<div class="card">
+<span>💰</span>
+<h3>Funding Documents</h3>
+<p>Track borrower paperwork</p>
+</div>
+
+<div class="card">
+<span>🛠️</span>
+<h3>Rehab Documents</h3>
+<p>Contractor budgets & scopes</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>RO'Lyfe Quick Uploads</h2>
+
+<a
+class="btn"
+href="https://form.jotform.com/253154859148062"
+target="_blank">
+
+📤 Quick Dropbox Upload
+
+</a>
+
+<a
+class="btn"
+href="https://form.jotform.com/261416399941062"
+target="_blank">
+
+📋 Submit Deal Package
+
+</a>
+
+</div>
+
+<div class="panel">
+
+<h2>Quick Links</h2>
+
+<div class="quick-links">
+
+<div class="link-box">
+<a href="https://rolrichman.github.io/rolyfe-os/" target="_blank">
+🖥️ RO'Lyfe OS
+</a>
+</div>
+
+<div class="link-box">
+<a href="../funding/index.html">
+💰 Funding Center
+</a>
+</div>
+
+<div class="link-box">
+<a href="../calculators/index.html">
+🧮 Deal Calculators
+</a>
+</div>
+
+<div class="link-box">
+<a href="../ai/index.html">
+🤖 AI Coaches
+</a>
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Document Notes</h2>
+
+<textarea
+id="notes"
+rows="8"
+placeholder="Store notes, lender conditions, borrower requirements, closing tasks..."
+></textarea>
+
+<a class="btn" onclick="saveNotes()">
+💾 Save Notes
+</a>
+
+</div>
+
+<div class="panel">
+
+<h2>Arena Document Stats</h2>
+
+<div class="stats">
+
+<div class="stat">
+<div class="value" id="deals">0</div>
+<div>Deals</div>
+</div>
+
+<div class="stat">
+<div class="value" id="trades">0</div>
+<div>Trades</div>
+</div>
+
+<div class="stat">
+<div class="value" id="assets">0</div>
+<div>Assets</div>
+</div>
+
+<div class="stat">
+<div class="value" id="games">0</div>
+<div>Chess Games</div>
+</div>
+
+</div>
+
+</div>
+
+<a href="../index.html" class="back">
+
+⬅ Back To Arena
+
+</a>
+
+<script>
+
+const notesBox =
+document.getElementById("notes");
+
+notesBox.value =
+localStorage.getItem("roDocsNotes") || "";
+
+function saveNotes(){
+
+localStorage.setItem(
+"roDocsNotes",
+notesBox.value
+);
+
+alert("Notes Saved");
+
+}
+
+document.getElementById("deals").textContent =
+localStorage.getItem("ro_deals") || 0;
+
+document.getElementById("trades").textContent =
+localStorage.getItem("ro_trades") || 0;
+
+document.getElementById("assets").textContent =
+localStorage.getItem("ro_assets") || 0;
+
+document.getElementById("games").textContent =
+localStorage.getItem("ro_games") || 0;
+
+</script>
+
+</body>
+</html>
