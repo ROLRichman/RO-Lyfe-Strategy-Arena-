@@ -1,1 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>RO'Lyfe Arena Settings™</title>
+
+<style>
+
+:root{
+--gold:#FFD700;
+--green:#00FF88;
+--red:#FF4444;
+--dark:#050505;
+--panel:#111827;
+--text:#ffffff;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:var(--dark);
+color:white;
+padding:15px;
+}
+
+header{
+text-align:center;
+padding:25px;
+margin-bottom:20px;
+}
+
+header h1{
+color:var(--gold);
+margin-bottom:10px;
+}
+
+header p{
+color:var(--green);
+}
+
+.panel{
+background:var(--panel);
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+.panel h2{
+color:var(--gold);
+margin-bottom:15px;
+}
+
+select,
+input{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+margin-bottom:10px;
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+background:var(--green);
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
+
+button:hover{
+opacity:.9;
+}
+
+.danger{
+background:var(--red);
+color:white;
+}
+
+.result{
+background:#0f172a;
+padding:15px;
+border-radius:10px;
+margin-top:15px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:12px;
+}
+
+.card{
+background:#0f172a;
+padding:15px;
+border-radius:10px;
+text-align:center;
+}
+
+.card h3{
+color:var(--gold);
+margin-bottom:10px;
+}
+
+.value{
+font-size:1.5rem;
+font-weight:bold;
+color:var(--green);
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:25px;
+color:var(--gold);
+text-decoration:none;
+font-size:1.1rem;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+
+<h1>⚙️ RO'Lyfe Arena Settings™</h1>
+
+<p>
+Control • Customize • Reset • Optimize
+</p>
+
+</header>
+
+<div class="panel">
+
+<h2>Theme Engine</h2>
+
+<select id="themeSelect">
+
+<option value="original">👑 Original Gold</option>
+<option value="emg">🔥 EMG Red</option>
+<option value="ace">⚡ ACE Green</option>
+<option value="future">🚀 Future Neon</option>
+
+</select>
+
+<button onclick="saveTheme()">
+
+Save Theme
+
+</button>
+
+<div id="themeResult" class="result">
+
+Current Theme: Original
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Commander Profile</h2>
+
+<input
+id="commander"
+placeholder="Enter Commander Name"
+>
+
+<button onclick="saveCommander()">
+
+Save Commander
+
+</button>
+
+<div id="commanderOutput" class="result">
+
+Commander: Guest
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Arena Statistics</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Trades</h3>
+<div class="value" id="trades">0</div>
+</div>
+
+<div class="card">
+<h3>Deals</h3>
+<div class="value" id="deals">0</div>
+</div>
+
+<div class="card">
+<h3>Chess Games</h3>
+<div class="value" id="games">0</div>
+</div>
+
+<div class="card">
+<h3>Assets</h3>
+<div class="value" id="assets">0</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Quick Arena Actions</h2>
+
+<button onclick="backupArena()">
+
+📦 Backup Arena Data
+
+</button>
+
+<button onclick="loadArena()">
+
+🔄 Reload Arena Data
+
+</button>
+
+</div>
+
+<div class="panel">
+
+<h2>Danger Zone</h2>
+
+<button
+class="danger"
+onclick="resetArena()">
+
+🗑 Reset All Arena Stats
+
+</button>
+
+<div id="resetStatus" class="result">
+
+Arena Ready
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>RO'Lyfe Links</h2>
+
+<button onclick="window.open('https://rolrichman.github.io/rolyfe-os/')">
+
+🖥 Open RO'Lyfe OS
+
+</button>
+
+<button onclick="window.open('../ai/index.html')">
+
+🤖 Open AI Coaches
+
+</button>
+
+<button onclick="window.open('../funding/index.html')">
+
+💰 Open Funding Center
+
+</button>
+
+</div>
+
+<a href="../index.html" class="back">
+
+⬅ Back To Arena
+
+</a>
+
+<script>
+
+loadStats();
+
+function loadStats(){
+
+document.getElementById("trades").textContent =
+localStorage.getItem("ro_trades") || 0;
+
+document.getElementById("deals").textContent =
+localStorage.getItem("ro_deals") || 0;
+
+document.getElementById("games").textContent =
+localStorage.getItem("ro_games") || 0;
+
+document.getElementById("assets").textContent =
+localStorage.getItem("ro_assets") || 0;
+
+let commander =
+localStorage.getItem("ro_commander") || "Guest";
+
+document.getElementById(
+"commanderOutput"
+).innerHTML =
+"Commander: " + commander;
+
+}
+
+function saveCommander(){
+
+let name =
+document.getElementById(
+"commander"
+).value;
+
+if(!name)return;
+
+localStorage.setItem(
+"ro_commander",
+name
+);
+
+loadStats();
+
+alert("Commander Saved");
+
+}
+
+function saveTheme(){
+
+let theme =
+document.getElementById(
+"themeSelect"
+).value;
+
+localStorage.setItem(
+"ro_theme",
+theme
+);
+
+document.getElementById(
+"themeResult"
+).innerHTML =
+"Theme Saved: " + theme;
+
+}
+
+function backupArena(){
+
+let data = {
+
+trades:
+localStorage.getItem("ro_trades") || 0,
+
+deals:
+localStorage.getItem("ro_deals") || 0,
+
+games:
+localStorage.getItem("ro_games") || 0,
+
+assets:
+localStorage.getItem("ro_assets") || 0,
+
+theme:
+localStorage.getItem("ro_theme") || "original",
+
+commander:
+localStorage.getItem("ro_commander") || "Guest"
+
+};
+
+alert(
+JSON.stringify(data,null,2)
+);
+
+}
+
+function loadArena(){
+
+loadStats();
+
+alert(
+"Arena Reloaded"
+);
+
+}
+
+function resetArena(){
+
+if(
+!confirm(
+"Reset ALL Arena Statistics?"
+)
+)return;
+
+localStorage.removeItem("ro_trades");
+localStorage.removeItem("ro_deals");
+localStorage.removeItem("ro_games");
+localStorage.removeItem("ro_assets");
+
+document.getElementById(
+"resetStatus"
+).innerHTML =
+"All Statistics Reset";
+
+loadStats();
+
+}
+
+</script>
+
+</body>
+</html>
