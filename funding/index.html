@@ -1,1 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>RO'Lyfe Funding Center™</title>
+
+<style>
+
+:root{
+--gold:#FFD700;
+--green:#00FF88;
+--red:#FF4444;
+--dark:#050505;
+--panel:#111827;
+--text:#ffffff;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:var(--dark);
+color:white;
+padding:15px;
+}
+
+header{
+text-align:center;
+padding:25px;
+margin-bottom:20px;
+}
+
+header h1{
+color:var(--gold);
+margin-bottom:10px;
+}
+
+header p{
+color:var(--green);
+}
+
+.panel{
+background:var(--panel);
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+.panel h2{
+color:var(--gold);
+margin-bottom:15px;
+}
+
+.button{
+display:block;
+width:100%;
+padding:14px;
+background:var(--green);
+color:black;
+font-weight:bold;
+text-align:center;
+text-decoration:none;
+border-radius:10px;
+margin-top:10px;
+}
+
+.button:hover{
+opacity:.9;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-bottom:10px;
+border:none;
+border-radius:8px;
+}
+
+.result{
+margin-top:15px;
+padding:15px;
+background:#1e293b;
+border-radius:10px;
+}
+
+.programs{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:10px;
+}
+
+.program{
+background:#1e293b;
+padding:15px;
+border-radius:10px;
+}
+
+.program h3{
+color:var(--green);
+margin-bottom:8px;
+}
+
+.checklist label{
+display:block;
+margin-bottom:10px;
+}
+
+.stat{
+background:#1e293b;
+padding:15px;
+border-radius:10px;
+margin-top:10px;
+text-align:center;
+}
+
+.value{
+font-size:1.6rem;
+font-weight:bold;
+color:var(--green);
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:25px;
+color:var(--gold);
+text-decoration:none;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+
+<h1>💰 RO'Lyfe Funding Center™</h1>
+
+<p>
+Funding • Execution • Closings
+</p>
+
+</header>
+
+<div class="panel">
+
+<h2>🚀 Launch Funding Tools</h2>
+
+<a
+class="button"
+target="_blank"
+href="https://www.jotform.com/agent/build/019bdd1fe57172838101dccf3612b1e9e787/publish/link">
+Open Jamal AI
+</a>
+
+<a
+class="button"
+target="_blank"
+href="https://form.jotform.com/261416399941062">
+Funding Application
+</a>
+
+<a
+class="button"
+target="_blank"
+href="https://form.jotform.com/253154859148062">
+Quick Dropbox Upload
+</a>
+
+</div>
+
+<div class="panel">
+
+<h2>📊 Funding Calculator</h2>
+
+<input id="purchase" type="number" placeholder="Purchase Price">
+
+<input id="rehab" type="number" placeholder="Rehab Budget">
+
+<input id="arv" type="number" placeholder="ARV">
+
+<button class="button" onclick="runFunding()">
+Analyze Deal
+</button>
+
+<div id="fundingOutput" class="result">
+Waiting...
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>🏦 Loan Programs</h2>
+
+<div class="programs">
+
+<div class="program">
+<h3>Fix & Flip</h3>
+<p>Purchase + Rehab Funding</p>
+</div>
+
+<div class="program">
+<h3>DSCR</h3>
+<p>Rental Property Loans</p>
+</div>
+
+<div class="program">
+<h3>Bridge</h3>
+<p>Short-Term Capital</p>
+</div>
+
+<div class="program">
+<h3>New Construction</h3>
+<p>Ground-Up Projects</p>
+</div>
+
+<div class="program">
+<h3>Commercial</h3>
+<p>Mixed Use & Commercial</p>
+</div>
+
+<div class="program">
+<h3>Portfolio</h3>
+<p>Multiple Properties</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>✅ Deal Submission Checklist</h2>
+
+<div class="checklist">
+
+<label><input type="checkbox"> Purchase Contract</label>
+
+<label><input type="checkbox"> Rehab Budget</label>
+
+<label><input type="checkbox"> Photos</label>
+
+<label><input type="checkbox"> Borrower Information</label>
+
+<label><input type="checkbox"> Exit Strategy</label>
+
+<label><input type="checkbox"> Insurance Quote</label>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>📈 Funding Statistics</h2>
+
+<div class="stat">
+<div class="value" id="dealCount">0</div>
+Deals Submitted
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>🎯 Close Mode</h2>
+
+<p>
+
+When a deal reaches SOLID status:
+
+<br><br>
+
+1. Submit Contract
+
+<br>
+
+2. Upload Documents
+
+<br>
+
+3. Complete Funding Form
+
+<br>
+
+4. Enter Underwriting
+
+<br>
+
+5. Close
+
+</p>
+
+</div>
+
+<a href="../index.html" class="back">
+
+⬅ Back To Arena
+
+</a>
+
+<script>
+
+document.getElementById("dealCount").textContent =
+localStorage.getItem("ro_deals") || 0;
+
+function runFunding(){
+
+let purchase =
+Number(document.getElementById("purchase").value);
+
+let rehab =
+Number(document.getElementById("rehab").value);
+
+let arv =
+Number(document.getElementById("arv").value);
+
+if(!purchase || !rehab || !arv){
+alert("Fill all fields");
+return;
+}
+
+let totalCost = purchase + rehab;
+
+let ltv =
+((totalCost/arv)*100).toFixed(2);
+
+let status="PASS";
+
+if(ltv <= 70){
+status="SOLID";
+}
+else if(ltv <= 85){
+status="CHECK";
+}
+
+document.getElementById("fundingOutput").innerHTML =
+
+`
+<b>Total Project Cost:</b> $${totalCost.toLocaleString()}<br><br>
+
+<b>ARV:</b> $${arv.toLocaleString()}<br><br>
+
+<b>Cost / ARV:</b> ${ltv}%<br><br>
+
+<b>Deal Status:</b> ${status}
+`;
+
+let deals =
+parseInt(localStorage.getItem("ro_deals") || 0);
+
+deals++;
+
+localStorage.setItem("ro_deals", deals);
+
+document.getElementById("dealCount").textContent =
+deals;
+
+}
+
+</script>
+
+</body>
+  </html>
